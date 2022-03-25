@@ -10,12 +10,12 @@ import java.util.stream.Collectors;
 
 public class MemoryMovieDao implements MovieDao {
 
-//    private static Long idSequence = 0L;
+    private static Long idSequence = 0L;
     private static List<Movie> movies = new ArrayList<>();
 
     @Override
     public Long save(Movie movie) {
-//        movie.setId(++idSequence);
+        movie.setId(++idSequence);
         movies.add(movie);
         return movie.getId();
     }

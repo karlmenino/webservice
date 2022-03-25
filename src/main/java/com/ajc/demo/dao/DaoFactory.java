@@ -11,4 +11,7 @@ public final class DaoFactory {
     public static MovieDao getMovieDao(){
         return new MemoryMovieDao();
     }
+    public static MovieDao getJpaMovieDao(){
+        return new MovieDaoJpa();
+    }
 }

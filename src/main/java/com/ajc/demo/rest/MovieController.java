@@ -13,13 +13,13 @@ import java.util.List;
 
 @Path("/movies")
 public class MovieController {
-    private static final List<Movie> movies = new ArrayList<>();
+
 
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
-        return Response.ok(movies).build();
+        return Response.ok(DaoFactory.getJpaMovieDao().findAll()).build();
     }
 
     @POST
@@ -28,7 +28,7 @@ public class MovieController {
     public Response createMovie(CreateMovie createMovie){
 
         Movie movie = new Movie(createMovie.getTitle(), createMovie.getDuration(), createMovie.getLocalDate());
-        DaoFactory.getMovieDao().save(movie);
+        DaoFactory.getJpaMovieDao().save(movie);
         return Response.status(201).build();
 
     }
@@ -37,8 +37,8 @@ public class MovieController {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") Long id) {
-        DaoFactory.getMovieDao().delete(id);
-        return Response.ok(movies).build();
+        DaoFactory.getJpaMovieDao().delete(id);
+        return Response.ok(DaoFactory.getJpaMovieDao().findAll()).build();
     }
 
     @PUT
